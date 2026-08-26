@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Interactive DSA Learning Studio</title>
+
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo">
+            <h1>DSA Learning Studio</h1>
+
+        </div>
+
+        <nav class="top-nav">
+
+            <button id="themeToggle" class="nav-btn">
+                🌙
+            </button>
+
+            <button id="menuToggle" class="nav-btn mobile-only">
+                ☰
+            </button>
+
+        </nav>
+
+    </header>
+
+    <div class="container">
+        <aside class="sidebar" id="sidebar">
+            <ul>
+                <li class="active" data-page="dashboard">
+                    Dashboard
+                </li>
+                <li data-page="array">
+                    Array
+                </li>
+                </li>
+                <li data-page="string">
+                    String
+                </li>
+                <li data-page="sorting">
+                    Sorting Algorithms
+                </li>
+
+                <li data-page="searching">
+                    Searching Algorithms
+                </li>
+
+                <li data-page="stack">
+                    Stack
+                </li>
+
+                <li data-page="queue">
+                    Queue
+                </li>
+
+                <li data-page="linkedlist">
+                    Linked List
+                </li>
+
+                <li data-page="comparison">
+                    Algorithm Comparison
+                </li>
+
+                <li data-page="quiz">
+                    Quiz
+                    <span class="sidebar-badge">Soon</span>
+                </li>
+
+                <li data-page="settings">
+                    Settings
+                </li>
+
+                <li data-page="about">
+                    About
+                </li>
+
+            </ul>
+
+        </aside>
+
+        <main id="app">
+            <section class="welcome">
+
+                <h1>
+                    Welcome to Interactive DSA Learning Studio
+                </h1>
+
+                <p>
+
+                    Learn Data Structures and Algorithms
+                    through interactive visualizations,
+                    animations, quizzes, comparisons,
+                    and real-time demonstrations.
+
+                </p>
+
+                <div class="dashboard-cards">
+
+                    <article class="card">
+
+                        <h3>Algorithms</h3>
+
+                        <p>10+</p>
+
+                    </article>
+
+                    <article class="card">
+
+                        <h3>Visualizations</h3>
+
+                        <p>Interactive</p>
+
+                    </article>
+
+                    <article class="card">
+
+                        <h3>Quiz</h3>
+
+                        <p>Practice Anytime</p>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <footer class="footer">
+
+        <p>
+
+            © 2026 Interactive DSA Learning Studio
+
+            |
+            Developed using HTML, CSS & JavaScript
+
+        </p>
+
+    </footer>
+    <dialog id="infoDialog">
+
+        <h2>Information</h2>
+        <p>
+            This application helps students
+            understand DSA concepts visually.
+        </p>
+
+        <button onclick="document.getElementById('infoDialog').close()">
+            Close
+        </button>
+
+    </dialog>
+
+    <script src="../js/index.js"></script>
+
+</body>
+
+</html>
