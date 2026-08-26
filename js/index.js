@@ -499,6 +499,7 @@ max="100">
 
 </div>
 
+<div id="stringMemoryPanelLocation"></div>
 
 <div
 class="memory-panel"
@@ -1846,76 +1847,112 @@ async function memorySimulation() {
     journeyArray.innerHTML = "";
 
     floating.textContent = "";
-
     floating.style.opacity = "0";
 
     floating.style.transform =
         "translateY(0) scale(.8)";
 
-    step.textContent = "Preparing Array";
+    step.textContent =
+        "Preparing Array";
 
     await sleep(600);
+
+
+    /* ==========================================
+       CREATE EMPTY MEMORY CELLS
+    ========================================== */
 
     for (let i = 0; i < arrayData.length; i++) {
 
         const cell =
             document.createElement("div");
 
-        cell.className = "journey-cell";
+        cell.className =
+            "journey-cell";
 
         journeyArray.appendChild(cell);
 
         await sleep(180);
-
     }
 
+
     await sleep(500);
+
+
+    /* ==========================================
+       STORE ELEMENTS ONE BY ONE
+    ========================================== */
 
     for (let i = 0; i < arrayData.length; i++) {
 
         const cells =
-            journeyArray.querySelectorAll(".journey-cell");
+            journeyArray.querySelectorAll(
+                ".journey-cell"
+            );
+
 
         document
             .getElementById("currentIndex")
             .textContent = i;
 
+
         document
             .getElementById("arrayOperation")
-            .textContent = "Storing Element";
+            .textContent =
+            "Storing Element";
+
 
         document
             .getElementById("arrayStatus")
             .textContent =
             `Element ${i + 1} of ${arrayData.length}`;
 
+
         step.textContent =
             `Adding Element ${i + 1} of ${arrayData.length}`;
+
+
+        /* ==========================================
+           SHOW FLOATING VALUE
+        ========================================== */
 
         floating.textContent =
             arrayData[i];
 
-        floating.style.transition = "none";
+        floating.style.transition =
+            "none";
 
-        floating.style.opacity = "0";
+        floating.style.opacity =
+            "0";
 
         floating.style.transform =
             "translateY(0) scale(.8)";
 
+
         await sleep(100);
+
 
         floating.style.transition =
             "opacity .3s ease, transform .3s ease";
 
-        floating.style.opacity = "1";
+        floating.style.opacity =
+            "1";
 
         floating.style.transform =
             "translateY(0) scale(1)";
 
+
         await sleep(500);
 
+
+        /* ==========================================
+           CALCULATE MOVEMENT
+        ========================================== */
+
         const animationArea =
-            document.getElementById("journeyAnimation");
+            document.getElementById(
+                "journeyAnimation"
+            );
 
         const floatingRect =
             floating.getBoundingClientRect();
@@ -1926,100 +1963,157 @@ async function memorySimulation() {
         const areaRect =
             animationArea.getBoundingClientRect();
 
+
         const floatingCenter =
             floatingRect.left +
             floatingRect.width / 2 -
             areaRect.left;
+
 
         const cellCenter =
             cellRect.left +
             cellRect.width / 2 -
             areaRect.left;
 
+
         const moveX =
-            cellCenter - floatingCenter;
+            cellCenter -
+            floatingCenter;
+
 
         const moveY =
-            cellRect.top - floatingRect.top;
+            cellRect.top -
+            floatingRect.top;
+
+
+        /* ==========================================
+           MOVE VALUE INTO MEMORY CELL
+        ========================================== */
 
         floating.style.transition =
             "transform .8s ease-in";
 
+
         floating.style.transform =
             `translate(${moveX}px, ${moveY}px) scale(.75)`;
 
+
         await sleep(800);
+
+
+        /* ==========================================
+           STORE VALUE
+        ========================================== */
 
         cells[i].textContent =
             arrayData[i];
 
-        cells[i].classList.add("fill");
 
-        floating.style.opacity = "0";
+        cells[i].classList.add(
+            "fill"
+        );
+
+
+        floating.style.opacity =
+            "0";
+
 
         await sleep(350);
 
-        cells[i].classList.remove("fill");
 
-        floating.style.transition = "none";
+        cells[i].classList.remove(
+            "fill"
+        );
+
+
+        floating.style.transition =
+            "none";
 
         floating.style.transform =
             "translate(0,0)";
 
+
+        /* ==========================================
+           UPDATE PROGRESS
+        ========================================== */
+
         const progress =
             Math.round(
-                ((i + 1) / arrayData.length) * 100
+                ((i + 1) /
+                    arrayData.length) *
+                100
             );
+
 
         document
             .getElementById("arrayProgress")
-            .value = progress;
+            .value =
+            progress;
+
 
         document
             .getElementById("arrayProgressText")
             .textContent =
             progress + "%";
 
-        await sleep(250);
 
+        await sleep(250);
     }
 
-    floating.style.opacity = "0";
+
+    /* ==========================================
+       COMPLETION
+    ========================================== */
+
+    floating.style.opacity =
+        "0";
+
 
     step.textContent =
         "Array Created Successfully ✓";
+
 
     document
         .getElementById("arrayOperation")
         .textContent =
         "Memory Allocation Completed";
 
+
     document
         .getElementById("arrayStatus")
         .textContent =
         "Ready";
 
+
     const cells =
-        journeyArray.querySelectorAll(".journey-cell");
+        journeyArray.querySelectorAll(
+            ".journey-cell"
+        );
+
 
     cells.forEach(function (cell) {
 
-        cell.classList.add("fill");
+        cell.classList.add(
+            "fill"
+        );
 
     });
+
 
     await sleep(500);
 
+
     cells.forEach(function (cell) {
 
-        cell.classList.remove("fill");
+        cell.classList.remove(
+            "fill"
+        );
 
     });
 
+
     await sleep(300);
-
 }
-
 function moveJourneyToSurface() {
 
     const panel =
@@ -2046,11 +2140,142 @@ function moveJourneyBack() {
     const surface =
         document.getElementById("journeySurface");
 
+    if (!panel || !location || !surface) {
+        return;
+    }
+
+    const first =
+        panel.getBoundingClientRect();
+
     location.appendChild(panel);
 
-    surface.classList.remove("active");
+    const last =
+        panel.getBoundingClientRect();
 
-    panel.classList.remove("moving");
+    const deltaX =
+        first.left - last.left;
+
+    const deltaY =
+        first.top - last.top;
+
+    panel.style.transition = "none";
+
+    panel.style.transform =
+        `translate3d(${deltaX}px, ${deltaY}px, 0)`;
+
+    panel.offsetHeight;
+
+    requestAnimationFrame(function () {
+
+        panel.style.transition =
+            "transform .55s cubic-bezier(.22, 1, .36, 1)";
+
+        panel.style.transform =
+            "translate3d(0, 0, 0)";
+
+    });
+
+    setTimeout(function () {
+
+        panel.style.transition = "";
+        panel.style.transform = "";
+
+        surface.classList.remove("active");
+
+        panel.classList.remove("moving");
+
+    }, 600);
+
+}
+
+function moveStringJourneyToSurface() {
+
+    const panel =
+        document.getElementById(
+            "stringMemoryPanel"
+        );
+
+    const surface =
+        document.getElementById(
+            "stringJourneySurface"
+        );
+
+    if (!panel || !surface) {
+        return;
+    }
+
+    surface.classList.add("active");
+
+    surface.appendChild(panel);
+
+    panel.classList.add("moving");
+
+}
+
+
+function moveStringJourneyBack() {
+
+    const panel =
+        document.getElementById(
+            "stringMemoryPanel"
+        );
+
+    const location =
+        document.getElementById(
+            "stringMemoryPanelLocation"
+        );
+
+    const surface =
+        document.getElementById(
+            "stringJourneySurface"
+        );
+
+    if (!panel || !location || !surface) {
+        return;
+    }
+
+    const first =
+        panel.getBoundingClientRect();
+
+    location.appendChild(panel);
+
+    const last =
+        panel.getBoundingClientRect();
+
+    const deltaX =
+        first.left - last.left;
+
+    const deltaY =
+        first.top - last.top;
+
+    panel.style.transition = "none";
+
+    panel.style.transform =
+        `translate3d(${deltaX}px, ${deltaY}px, 0)`;
+
+    panel.offsetHeight;
+
+    requestAnimationFrame(function () {
+
+        panel.style.transition =
+            "transform .55s cubic-bezier(.22, 1, .36, 1)";
+
+        panel.style.transform =
+            "translate3d(0, 0, 0)";
+
+    });
+
+    setTimeout(function () {
+
+        panel.style.transition = "";
+        panel.style.transform = "";
+
+        surface.classList.remove("active");
+
+        panel.classList.remove("moving");
+
+    }, 600);
+
 }
 
 function displayArray() {
@@ -3494,63 +3719,110 @@ async function startStringMemorySimulation() {
 
     stringAnimating = true;
 
-    const panel =
+    const status =
         document.getElementById(
-            "stringMemoryPanel"
+            "stringStatus"
         );
 
     try {
 
-        panel.classList.add(
-            "string-simulation-active"
-        );
+        document
+            .getElementById(
+                "stringOperation"
+            )
+            .textContent =
+            "Creating String";
 
-        await sleep(600);
+        status.textContent =
+            "Processing";
+
+        document
+            .getElementById(
+                "stringProgress"
+            )
+            .value = 0;
+
+        document
+            .getElementById(
+                "stringProgressText"
+            )
+            .textContent = "0%";
+
+        document
+            .getElementById(
+                "stringSize"
+            )
+            .textContent =
+            stringData.length;
+
+
+        moveStringJourneyToSurface();
+
+        await sleep(650);
+
 
         await stringMemorySimulation();
 
+
         displayString();
+
+
+        document
+            .getElementById(
+                "stringOperation"
+            )
+            .textContent =
+            "String Created";
+
+        status.textContent =
+            "Ready";
+
+        document
+            .getElementById(
+                "stringCurrentIndex"
+            )
+            .textContent =
+            "--";
+
 
         await sleep(700);
 
     }
+
     catch (error) {
 
         console.error(
-            "String Simulation Error:",
+            "String Journey Error:",
             error
         );
 
-        const status =
-            document.getElementById(
-                "stringStatus"
-            );
+        status.textContent =
+            "Simulation Error";
 
-        if (status) {
+    }
 
-            status.textContent =
-                "Simulation Error";
+    finally {
 
-            status.style.color =
-                "red";
+        try {
+
+            moveStringJourneyBack();
 
         }
 
-    }
-    finally {
-        panel.classList.remove(
-            "string-simulation-active"
-        );
+        catch (error) {
 
-        window.scrollTo(
-            0,
-            savedScrollY
-        );
+            console.error(
+                "String Journey Return Error:",
+                error
+            );
+
+        }
 
         stringAnimating = false;
-    }
-}
 
+    }
+
+}
 /* ==========================================
    STRING MEMORY SIMULATION
 ========================================== */
@@ -4157,63 +4429,6 @@ async function traverseString() {
     updateStringSyntax("traverse");
 
     stringAnimating = false;
-
-}
-
-function moveStringJourneyToSurface() {
-
-    const panel =
-        document.getElementById(
-            "stringMemoryPanel"
-        );
-
-    const surface =
-        document.getElementById(
-            "stringJourneySurface"
-        );
-
-    if (!panel || !surface) {
-        return;
-    }
-
-    surface.classList.add("active");
-
-    surface.appendChild(panel);
-
-    panel.classList.add("moving");
-
-}
-
-function moveStringJourneyBack() {
-
-    const panel =
-        document.getElementById(
-            "stringMemoryPanel"
-        );
-
-    const surface =
-        document.getElementById(
-            "stringJourneySurface"
-        );
-
-    if (!panel || !surface) {
-        return;
-    }
-
-    const location =
-        document.getElementById(
-            "stringMemoryPanelLocation"
-        );
-
-    if (location) {
-
-        location.appendChild(panel);
-
-    }
-
-    panel.classList.remove("moving");
-
-    surface.classList.remove("active");
 
 }
 

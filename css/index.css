@@ -402,7 +402,7 @@ body.dark .memory-card {
 
     border-radius: 12px;
 
-    box-shadow: 0 5px 15px rgba(0, 0, 0, .08);
+    box-shadow: 0 5px 15px rgba(49, 47, 47, 0.08);
 
 }
 
@@ -416,9 +416,9 @@ body.dark .memory-card {
 
 .syntax-panel pre {
 
-    background: #0f172a;
+    background: #01073de0;
 
-    color: #22c55e;
+    color: #f4f3f5;
 
     padding: 20px;
 
@@ -426,7 +426,9 @@ body.dark .memory-card {
 
     overflow: auto;
 
-    font-size: 15px;
+    font-size: 25px;
+
+    font-weight:bolder;
 
     line-height: 1.8;
 
@@ -606,51 +608,101 @@ body.dark .memory-card {
     z-index: 5;
 }
 
-
 /* ==========================================
-   JOURNEY CELL
+   ARRAY DATA JOURNEY - RESTORED
 ========================================== */
 
-.journey-cell {
-
-    width: 65px;
-    height: 65px;
-
-    border: 2px solid #4a90e2;
-
-    border-radius: 10px;
-
+.journey-animation {
+    width: 100%;
+    min-height: 180px;
     display: flex;
-
     justify-content: center;
-
     align-items: center;
+    position: relative;
+    overflow: visible;
+}
 
-    font-size: 22px;
+.journey-array {
+    display: flex !important;
+    gap: 15px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 5;
+}
 
-    font-weight: bold;
+.journey-cell {
+    width: 65px !important;
+    height: 65px !important;
 
-    background: #f8fbff;
+    min-width: 65px !important;
+    min-height: 65px !important;
 
-    color: #1f2937;
+    box-sizing: border-box !important;
 
-    /*
-       IMPORTANT:
-       Only transform is used for physical movement.
-       Background/border changes are separate states.
-    */
+    border: 2px solid #4a90e2 !important;
+    border-radius: 10px !important;
+
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+
+    background: #f8fbff !important;
+    color: #1f2937 !important;
+
+    font-size: 22px !important;
+    font-weight: bold !important;
+
+    position: relative;
+    z-index: 2;
 
     transition:
         transform .65s cubic-bezier(.22, 1, .36, 1),
         opacity .35s ease;
 
-    will-change: transform, opacity;
+    flex: 0 0 65px !important;
+}
 
-    backface-visibility: hidden;
+.journey-cell.active {
+    background: #dbeafe !important;
+    border-color: #4a90e2 !important;
 
-    position: relative;
+    transform:
+        translate3d(0, -10px, 0)
+        scale(1.06);
+}
 
-    z-index: 2;
+.journey-cell.fill {
+    background: #4a90e2 !important;
+    color: white !important;
+    border-color: #4a90e2 !important;
+
+    transform:
+        translate3d(0, -4px, 0)
+        scale(1.04);
+}
+
+.journey-cell.delete {
+    background: #ef4444 !important;
+    color: white !important;
+    border-color: #ef4444 !important;
+
+    transform:
+        translate3d(0, -10px, 0)
+        scale(1.08);
+
+    opacity: .65;
+}
+
+.journey-cell.shift-left {
+    transform:
+        translate3d(-80px, 0, 0)
+        scale(1.03);
+
+    background: #4a90e2 !important;
+    color: white !important;
+    border-color: #4a90e2 !important;
 }
 
 /* ==========================================
@@ -1039,38 +1091,6 @@ body.dark .string-memory-card {
     background: #24324d;
 
     color: white;
-}
-
-#stringJourneySurface {
-    position: relative;
-    min-height: 0;
-    overflow: visible;
-}
-
-#stringJourneySurface.active {
-    min-height: 420px;
-    margin: 25px 0;
-}
-
-#stringMemoryPanel {
-    position: relative;
-    z-index: 5;
-
-    transition:
-        transform .7s cubic-bezier(.22, 1, .36, 1),
-        box-shadow .5s ease;
-
-    will-change: transform;
-}
-
-#stringMemoryPanel.string-simulation-active {
-    transform: translateY(-210px);
-    z-index: 5;
-}
-
-#stringMemoryPanel.moving {
-    transform: translateY(0);
-    opacity: 1;
 }
 
 
