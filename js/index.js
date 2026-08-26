@@ -1847,112 +1847,76 @@ async function memorySimulation() {
     journeyArray.innerHTML = "";
 
     floating.textContent = "";
+
     floating.style.opacity = "0";
 
     floating.style.transform =
         "translateY(0) scale(.8)";
 
-    step.textContent =
-        "Preparing Array";
+    step.textContent = "Preparing Array";
 
     await sleep(600);
-
-
-    /* ==========================================
-       CREATE EMPTY MEMORY CELLS
-    ========================================== */
 
     for (let i = 0; i < arrayData.length; i++) {
 
         const cell =
             document.createElement("div");
 
-        cell.className =
-            "journey-cell";
+        cell.className = "journey-cell";
 
         journeyArray.appendChild(cell);
 
         await sleep(180);
+
     }
 
-
     await sleep(500);
-
-
-    /* ==========================================
-       STORE ELEMENTS ONE BY ONE
-    ========================================== */
 
     for (let i = 0; i < arrayData.length; i++) {
 
         const cells =
-            journeyArray.querySelectorAll(
-                ".journey-cell"
-            );
-
+            journeyArray.querySelectorAll(".journey-cell");
 
         document
             .getElementById("currentIndex")
             .textContent = i;
 
-
         document
             .getElementById("arrayOperation")
-            .textContent =
-            "Storing Element";
-
+            .textContent = "Storing Element";
 
         document
             .getElementById("arrayStatus")
             .textContent =
             `Element ${i + 1} of ${arrayData.length}`;
 
-
         step.textContent =
             `Adding Element ${i + 1} of ${arrayData.length}`;
-
-
-        /* ==========================================
-           SHOW FLOATING VALUE
-        ========================================== */
 
         floating.textContent =
             arrayData[i];
 
-        floating.style.transition =
-            "none";
+        floating.style.transition = "none";
 
-        floating.style.opacity =
-            "0";
+        floating.style.opacity = "0";
 
         floating.style.transform =
             "translateY(0) scale(.8)";
 
-
         await sleep(100);
-
 
         floating.style.transition =
             "opacity .3s ease, transform .3s ease";
 
-        floating.style.opacity =
-            "1";
+        floating.style.opacity = "1";
 
         floating.style.transform =
             "translateY(0) scale(1)";
 
-
         await sleep(500);
 
-
-        /* ==========================================
-           CALCULATE MOVEMENT
-        ========================================== */
-
         const animationArea =
-            document.getElementById(
-                "journeyAnimation"
-            );
+            document.getElementById("journeyAnimation");
 
         const floatingRect =
             floating.getBoundingClientRect();
@@ -1963,157 +1927,100 @@ async function memorySimulation() {
         const areaRect =
             animationArea.getBoundingClientRect();
 
-
         const floatingCenter =
             floatingRect.left +
             floatingRect.width / 2 -
             areaRect.left;
-
 
         const cellCenter =
             cellRect.left +
             cellRect.width / 2 -
             areaRect.left;
 
-
         const moveX =
-            cellCenter -
-            floatingCenter;
-
+            cellCenter - floatingCenter;
 
         const moveY =
-            cellRect.top -
-            floatingRect.top;
-
-
-        /* ==========================================
-           MOVE VALUE INTO MEMORY CELL
-        ========================================== */
+            cellRect.top - floatingRect.top;
 
         floating.style.transition =
             "transform .8s ease-in";
 
-
         floating.style.transform =
             `translate(${moveX}px, ${moveY}px) scale(.75)`;
 
-
         await sleep(800);
-
-
-        /* ==========================================
-           STORE VALUE
-        ========================================== */
 
         cells[i].textContent =
             arrayData[i];
 
+        cells[i].classList.add("fill");
 
-        cells[i].classList.add(
-            "fill"
-        );
-
-
-        floating.style.opacity =
-            "0";
-
+        floating.style.opacity = "0";
 
         await sleep(350);
 
+        cells[i].classList.remove("fill");
 
-        cells[i].classList.remove(
-            "fill"
-        );
-
-
-        floating.style.transition =
-            "none";
+        floating.style.transition = "none";
 
         floating.style.transform =
             "translate(0,0)";
 
-
-        /* ==========================================
-           UPDATE PROGRESS
-        ========================================== */
-
         const progress =
             Math.round(
-                ((i + 1) /
-                    arrayData.length) *
-                100
+                ((i + 1) / arrayData.length) * 100
             );
-
 
         document
             .getElementById("arrayProgress")
-            .value =
-            progress;
-
+            .value = progress;
 
         document
             .getElementById("arrayProgressText")
             .textContent =
             progress + "%";
 
-
         await sleep(250);
+
     }
 
-
-    /* ==========================================
-       COMPLETION
-    ========================================== */
-
-    floating.style.opacity =
-        "0";
-
+    floating.style.opacity = "0";
 
     step.textContent =
         "Array Created Successfully ✓";
-
 
     document
         .getElementById("arrayOperation")
         .textContent =
         "Memory Allocation Completed";
 
-
     document
         .getElementById("arrayStatus")
         .textContent =
         "Ready";
 
-
     const cells =
-        journeyArray.querySelectorAll(
-            ".journey-cell"
-        );
-
+        journeyArray.querySelectorAll(".journey-cell");
 
     cells.forEach(function (cell) {
 
-        cell.classList.add(
-            "fill"
-        );
+        cell.classList.add("fill");
 
     });
-
 
     await sleep(500);
 
-
     cells.forEach(function (cell) {
 
-        cell.classList.remove(
-            "fill"
-        );
+        cell.classList.remove("fill");
 
     });
 
-
     await sleep(300);
+
 }
+
 function moveJourneyToSurface() {
 
     const panel =
@@ -5180,13 +5087,453 @@ async function stringDeletionJourney(index) {
 
 }
 
+async function stringUpdateJourney(
+    index,
+    oldValue,
+    newValue
+) {
+
+    const step =
+        document.getElementById(
+            "stringJourneyStep"
+        );
+
+    const journeyArray =
+        document.getElementById(
+            "stringJourneyArray"
+        );
+
+    const floating =
+        document.getElementById(
+            "stringFloatingValue"
+        );
 
 
-function updateString() {
+    journeyArray.innerHTML = "";
+
+    floating.textContent = "";
+
+    floating.style.opacity =
+        "0";
+
+    floating.style.transition =
+        "none";
+
+    floating.style.transform =
+        "translate(0,0) scale(.8)";
+
+
+    step.textContent =
+        `Accessing Index ${index}`;
+
+
+    for (
+        let i = 0;
+        i < stringData.length;
+        i++
+    ) {
+
+        const cell =
+            document.createElement(
+                "div"
+            );
+
+        cell.className =
+            "journey-cell";
+
+        cell.textContent =
+            stringData[i];
+
+        journeyArray.appendChild(
+            cell
+        );
+
+    }
+
+
+    await sleep(500);
+
+
+    const cells =
+        journeyArray.querySelectorAll(
+            ".journey-cell"
+        );
+
+
+    cells[index].classList.add(
+        "active"
+    );
+
+
+    step.textContent =
+        `Reading Character "${oldValue}" at Index ${index}`;
+
+
+    document
+        .getElementById(
+            "stringStatus"
+        )
+        .textContent =
+        "Reading Old Character";
+
+
+    await sleep(700);
+
+
+    floating.textContent =
+        oldValue;
+
+    floating.style.opacity =
+        "1";
+
+    floating.style.transform =
+        "translate(0,-55px) scale(1)";
+
+
+    step.textContent =
+        `Removing Old Character "${oldValue}"`;
+
+
+    await sleep(600);
+
+
+    floating.style.opacity =
+        "0";
+
+    floating.style.transform =
+        "translate(0,-80px) scale(.7)";
+
+
+    cells[index].classList.remove(
+        "active"
+    );
+
+    cells[index].classList.add(
+        "update"
+    );
+
+
+    await sleep(450);
+
+
+    step.textContent =
+        `Storing New Character "${newValue}"`;
+
+
+    floating.textContent =
+        newValue;
+
+    floating.style.transition =
+        "opacity .3s ease, transform .5s ease";
+
+    floating.style.opacity =
+        "1";
+
+    floating.style.transform =
+        "translate(0,0) scale(1)";
+
+
+    await sleep(500);
+
+
+    cells[index].textContent =
+        newValue;
+
+    cells[index].classList.remove(
+        "update"
+    );
+
+    cells[index].classList.add(
+        "fill"
+    );
+
+
+    floating.style.opacity =
+        "0";
+
+
+    await sleep(600);
+
+
+    step.textContent =
+        `Index ${index} Updated Successfully ✓`;
+
+
+    document
+        .getElementById(
+            "stringStatus"
+        )
+        .textContent =
+        "Character Updated";
+
+
+    await sleep(500);
+
+}
+
+async function updateString() {
+
+    if (stringAnimating) {
+        return;
+    }
 
     if (stringData.length === 0) {
 
+        document
+            .getElementById("stringStatus")
+            .textContent =
+            "Generate a String First";
+
         return;
+
+    }
+
+    const input =
+        document.getElementById("stringInput");
+
+    const indexInput =
+        document.getElementById("stringIndexInput");
+
+
+    if (indexInput.style.display === "none") {
+
+        input.style.display = "block";
+
+        input.value = "";
+
+        input.placeholder =
+            "Enter new character";
+
+        indexInput.style.display = "block";
+
+        indexInput.value = "";
+
+        indexInput.placeholder =
+            "Enter index";
+
+        document
+            .getElementById("stringOperation")
+            .textContent =
+            "Update";
+
+        document
+            .getElementById("stringStatus")
+            .textContent =
+            "Enter Character and Index";
+
+        return;
+
+    }
+
+
+    const valueText =
+        input.value.trim();
+
+    const indexText =
+        indexInput.value.trim();
+
+
+    if (
+        valueText === "" ||
+        valueText.length !== 1
+    ) {
+
+        document
+            .getElementById("stringStatus")
+            .textContent =
+            "Enter a valid character";
+
+        document
+            .getElementById("stringStatus")
+            .style.color =
+            "red";
+
+        return;
+
+    }
+
+
+    if (
+        indexText === "" ||
+        !Number.isInteger(
+            Number(indexText)
+        ) ||
+        Number(indexText) < 0 ||
+        Number(indexText) >= stringData.length
+    ) {
+
+        document
+            .getElementById("stringStatus")
+            .textContent =
+            "Enter a valid index";
+
+        document
+            .getElementById("stringStatus")
+            .style.color =
+            "red";
+
+        return;
+
+    }
+
+
+    const value =
+        valueText;
+
+    const index =
+        Number(indexText);
+
+    const oldValue =
+        stringData[index];
+
+
+    document
+        .getElementById("stringStatus")
+        .style.color =
+        "";
+
+
+    document
+        .getElementById("stringOperation")
+        .textContent =
+        "Updating Character";
+
+    document
+        .getElementById("stringStatus")
+        .textContent =
+        "Preparing Update";
+
+    document
+        .getElementById("stringCurrentIndex")
+        .textContent =
+        index;
+
+
+    updateStringSyntax(
+        "update",
+        index,
+        value
+    );
+
+
+    stringAnimating = true;
+
+
+    try {
+
+        moveStringJourneyToSurface();
+
+        await sleep(750);
+
+
+        await stringUpdateJourney(
+            index,
+            oldValue,
+            value
+        );
+
+
+        stringData[index] =
+            value;
+
+
+        displayString();
+
+
+        const boxes =
+            document.querySelectorAll(
+                ".string-box"
+            );
+
+
+        if (boxes[index]) {
+
+            boxes[index].classList.add(
+                "update"
+            );
+
+        }
+
+
+        document
+            .getElementById("stringStatus")
+            .textContent =
+            `Character "${oldValue}" Updated to "${value}"`;
+
+
+        document
+            .getElementById("stringOperation")
+            .textContent =
+            "Update Completed";
+
+
+        await sleep(animationSpeed);
+
+
+        if (boxes[index]) {
+
+            boxes[index].classList.remove(
+                "update"
+            );
+
+        }
+
+
+        moveStringJourneyBack();
+
+
+        document
+            .getElementById("stringCurrentIndex")
+            .textContent =
+            "--";
+
+
+        input.value = "";
+
+        input.placeholder =
+            "Enter character";
+
+
+        indexInput.value = "";
+
+        indexInput.style.display =
+            "none";
+
+
+        stringAnimating = false;
+
+
+        document
+            .getElementById("stringOperation")
+            .textContent =
+            "Ready";
+
+        document
+            .getElementById("stringStatus")
+            .textContent =
+            "Ready";
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "String Update Error:",
+            error
+        );
+
+
+        moveStringJourneyBack();
+
+
+        stringAnimating = false;
+
+
+        document
+            .getElementById("stringStatus")
+            .textContent =
+            "Update Failed";
+
     }
 
 }
