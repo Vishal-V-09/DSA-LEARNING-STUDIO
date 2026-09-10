@@ -7,6 +7,10 @@ let arrayData = [];
 let arrayAnimating = false;
 let stringData = [];
 let stringAnimating = false;
+let quizQuestions = [];
+let quizCurrentIndex = 0;
+let quizScore = 0;
+let quizAnswers = [];
 let originalInput = "";
 let animationSpeed = 600;
 let quickComparisons = 0;
@@ -1285,11 +1289,219 @@ Start Sorting
 </section>
 `,
 
-    quiz: `
-<section>
-    <h1>Quiz</h1>
-    <p>Test your DSA knowledge using multiple-choice questions.</p><br>
-    <button class="primary-btn">Start Quiz</button>
+quiz: `
+<section class="quiz-page">
+
+    <div class="quiz-header">
+
+        <div>
+            <h1>DSA Quiz</h1>
+
+            <p>
+                Test your Data Structures and Algorithms knowledge.
+            </p>
+        </div>
+
+        <div class="quiz-meta">
+
+            <span id="quizQuestionCount">
+                Quiz Setup
+            </span>
+
+            <span
+                class="quiz-difficulty"
+                id="quizDifficultyDisplay">
+                Medium
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div id="quizStartSection">
+
+        <div class="quiz-setup-card">
+
+            <h2>
+                Customize Your Quiz
+            </h2>
+
+            <p class="quiz-setup-description">
+                Choose your topic, difficulty and number of questions.
+            </p>
+
+
+            <div class="quiz-setup-grid">
+
+
+                <!-- Topic -->
+
+                <div class="quiz-setting">
+
+                    <label for="quizTopic">
+                        Topic
+                    </label>
+
+                    <select id="quizTopic">
+
+                        <option value="Array">
+                            Array
+                        </option>
+
+                        <option value="String">
+                            String
+                        </option>
+
+                        <option value="Sorting Algorithms">
+                            Sorting Algorithms
+                        </option>
+
+                        <option value="Searching Algorithms">
+                            Searching Algorithms
+                        </option>
+
+                        <option value="Stack">
+                            Stack
+                        </option>
+
+                        <option value="Queue">
+                            Queue
+                        </option>
+
+                        <option value="Linked List">
+                            Linked List
+                        </option>
+
+                        <option value="Algorithm Comparison">
+                            Algorithm Comparison
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Difficulty -->
+
+                <div class="quiz-setting">
+
+                    <label for="quizDifficulty">
+                        Difficulty
+                    </label>
+
+                    <select id="quizDifficulty">
+
+                        <option value="Easy">
+                            Easy
+                        </option>
+
+                        <option value="Medium" selected>
+                            Medium
+                        </option>
+
+                        <option value="Hard">
+                            Hard
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Number of Questions -->
+
+                <div class="quiz-setting">
+
+                    <label for="quizCount">
+                        Number of Questions
+                    </label>
+
+                    <select id="quizCount">
+
+                        <option value="10">
+                            10 Questions
+                        </option>
+
+                        <option value="25">
+                            25 Questions
+                        </option>
+
+                        <option value="50">
+                            50 Questions
+                        </option>
+
+                        <option value="100">
+                            100 Questions
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="quiz-selection-summary">
+
+
+                <div>
+
+                    <strong>
+                        Topic
+                    </strong>
+
+                    <span id="selectedTopicText">
+                        Array
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Difficulty
+                    </strong>
+
+                    <span id="selectedDifficultyText">
+                        Medium
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Questions
+                    </strong>
+
+                    <span id="selectedCountText">
+                        10
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            <button
+                class="primary-btn"
+                id="startQuizBtn">
+
+                Start Quiz
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div id="quizArea"></div>
+
 </section>
 `,
 
@@ -1490,6 +1702,10 @@ function loadPage(pageName) {
 
     else if (pageName === "settings") {
         initializeSettings();
+    }
+
+    else if (pageName === "quiz") {
+        initializeQuiz();
     }
     else if (pageName === "comparison") {
 
@@ -6837,6 +7053,711 @@ function updateArrows() {
     }
 }
 
+function initializeQuiz() {
+
+    const startQuizBtn =
+        document.getElementById("startQuizBtn");
+
+    const topicSelect =
+        document.getElementById("quizTopic");
+
+    const difficultySelect =
+        document.getElementById("quizDifficulty");
+
+    const countSelect =
+        document.getElementById("quizCount");
+
+
+    startQuizBtn.addEventListener(
+        "click",
+        startQuiz
+    );
+
+
+    topicSelect.addEventListener(
+        "change",
+        updateQuizSelection
+    );
+
+
+    difficultySelect.addEventListener(
+        "change",
+        updateQuizSelection
+    );
+
+
+    countSelect.addEventListener(
+        "change",
+        updateQuizSelection
+    );
+
+
+    updateQuizSelection();
+}
+
+function updateQuizSelection() {
+
+    const topic =
+        document.getElementById("quizTopic").value;
+
+    const difficulty =
+        document.getElementById("quizDifficulty").value;
+
+    const count =
+        document.getElementById("quizCount").value;
+
+
+    document.getElementById(
+        "selectedTopicText"
+    ).textContent = topic;
+
+
+    document.getElementById(
+        "selectedDifficultyText"
+    ).textContent = difficulty;
+
+
+    document.getElementById(
+        "selectedCountText"
+    ).textContent = count;
+
+
+    document.getElementById(
+        "quizDifficultyDisplay"
+    ).textContent = difficulty;
+}
+
+
+
+async function startQuiz() {
+
+    const quizArea =
+        document.getElementById("quizArea");
+
+    const startQuizBtn =
+        document.getElementById("startQuizBtn");
+
+
+    const topic =
+        document.getElementById("quizTopic").value;
+
+    const difficulty =
+        document.getElementById("quizDifficulty").value;
+
+    const count =
+        parseInt(
+            document.getElementById("quizCount").value
+        );
+
+
+    startQuizBtn.disabled = true;
+
+
+    document.getElementById(
+        "quizStartSection"
+    ).style.display = "none";
+
+
+    showQuizLoading(
+        topic,
+        difficulty,
+        count
+    );
+
+
+    try {
+
+        const response = await fetch(
+            "http://127.0.0.1:5000/api/quiz",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    topic: topic,
+
+                    difficulty: difficulty,
+
+                    count: count
+
+                })
+            }
+        );
+
+
+        const data =
+            await response.json();
+        
+        if (window.quizLoadingTimer) {
+
+    clearInterval(
+        window.quizLoadingTimer
+    );
+
+    window.quizLoadingTimer =
+        null;
+}
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.details ||
+                data.error ||
+                "Quiz generation failed."
+            );
+
+        }
+
+
+        if (
+            !data.questions ||
+            !Array.isArray(data.questions)
+        ) {
+
+            throw new Error(
+                "Invalid quiz data received."
+            );
+
+        }
+
+
+        if (data.questions.length === 0) {
+
+            throw new Error(
+                "No questions were generated."
+            );
+
+        }
+
+
+        quizQuestions =
+            data.questions;
+
+
+        quizCurrentIndex =
+            0;
+
+
+        quizScore =
+            0;
+
+
+        quizAnswers =
+            [];
+
+
+        document.getElementById(
+            "quizQuestionCount"
+        ).textContent =
+            `Question 1 / ${quizQuestions.length}`;
+
+
+        document.getElementById(
+            "quizDifficultyDisplay"
+        ).textContent =
+            difficulty;
+
+
+        showQuizQuestion();
+
+
+    }
+    catch (error) {
+
+        console.error(
+            "Quiz Error:",
+            error
+        );
+
+
+        document.getElementById(
+            "quizStartSection"
+        ).style.display = "block";
+
+
+        startQuizBtn.disabled = false;
+
+
+        quizArea.innerHTML = `
+
+            <div class="quiz-error">
+
+                <h2>
+                    Unable to Generate Quiz
+                </h2>
+
+                <p>
+                    ${error.message}
+                </p>
+
+                <button
+                    class="primary-btn"
+                    onclick="startQuiz()">
+
+                    Try Again
+
+                </button>
+
+            </div>
+
+        `;
+    }
+
+}
+
+function showQuizLoading(
+    topic,
+    difficulty,
+    count
+) {
+
+    const quizArea =
+        document.getElementById("quizArea");
+
+
+    let remainingTime = 20;
+
+    let progress = 0;
+
+
+    quizArea.innerHTML = `
+
+        <div class="quiz-loading">
+
+            <div class="quiz-loading-icon">
+                🤖
+            </div>
+
+            <h2>
+                Generating Your Quiz...
+            </h2>
+
+            <p>
+                Creating ${count}
+                ${difficulty.toLowerCase()}
+                questions about
+                <strong>${topic}</strong>.
+            </p>
+
+
+            <div class="quiz-progress">
+
+                <div
+                    id="quizProgressBar"
+                    class="quiz-progress-bar">
+                </div>
+
+            </div>
+
+
+            <div class="quiz-time">
+
+                Estimated time remaining:
+
+                <strong id="quizTimeRemaining">
+                    ~20 sec
+                </strong>
+
+            </div>
+
+
+            <p
+                id="quizLoadingStatus"
+                class="quiz-loading-status">
+
+                Preparing questions with AI...
+
+            </p>
+
+        </div>
+
+    `;
+
+
+    const timer =
+        setInterval(function () {
+
+            remainingTime--;
+
+            progress += 5;
+
+
+            if (progress > 95) {
+                progress = 95;
+            }
+
+
+            const timeElement =
+                document.getElementById(
+                    "quizTimeRemaining"
+                );
+
+
+            const progressBar =
+                document.getElementById(
+                    "quizProgressBar"
+                );
+
+
+            const statusElement =
+                document.getElementById(
+                    "quizLoadingStatus"
+                );
+
+
+            if (timeElement) {
+
+                if (remainingTime > 0) {
+
+                    timeElement.textContent =
+                        `~${remainingTime} sec`;
+
+                }
+                else {
+
+                    timeElement.textContent =
+                        "Almost ready...";
+
+                }
+
+            }
+
+
+            if (progressBar) {
+
+                progressBar.style.width =
+                    progress + "%";
+
+            }
+
+
+            if (statusElement) {
+
+                if (remainingTime <= 15 &&
+                    remainingTime > 8) {
+
+                    statusElement.textContent =
+                        "AI is generating your questions...";
+
+                }
+                else if (remainingTime <= 8 &&
+                         remainingTime > 0) {
+
+                    statusElement.textContent =
+                        "Almost ready...";
+
+                }
+                else if (remainingTime <= 0) {
+
+                    statusElement.textContent =
+                        "Still generating, please wait...";
+
+                }
+
+            }
+
+
+        }, 1000);
+
+
+    window.quizLoadingTimer =
+        timer;
+}
+
+
+function showQuizQuestion() {
+
+    const quizArea =
+        document.getElementById("quizArea");
+
+    const questionCount =
+        document.getElementById("quizQuestionCount");
+
+    if (quizCurrentIndex >= quizQuestions.length) {
+
+        submitQuiz();
+
+        return;
+    }
+
+    const question =
+        quizQuestions[quizCurrentIndex];
+
+    questionCount.textContent =
+        `Question ${quizCurrentIndex + 1} / ${quizQuestions.length}`;
+
+    quizArea.innerHTML = `
+
+        <div class="quiz-layout">
+
+            <div class="quiz-main">
+
+                <div class="quiz-question-card">
+
+                    <div class="quiz-question-number">
+                        Question ${quizCurrentIndex + 1}
+                    </div>
+
+                    <h2>
+                        ${question.question}
+                    </h2>
+
+                </div>
+
+<div class="quiz-options">
+
+    ${question.options.map(function(option, index){
+
+        return `
+            <button
+                class="quiz-option ${quizAnswers[quizCurrentIndex] === index ? "selected" : ""}"
+                onclick="checkQuizAnswer(${index})">
+
+                <span class="option-letter">
+                    ${String.fromCharCode(65 + index)}
+                </span>
+
+                <span>
+                    ${option}
+                </span>
+
+            </button>
+        `;
+
+    }).join("")}
+
+</div>
+
+                <div class="quiz-navigation">
+
+                    <button
+                        class="quiz-nav-btn"
+                        onclick="previousQuizQuestion()"
+                        ${quizCurrentIndex === 0 ? "disabled" : ""}>
+                        Previous
+                    </button>
+
+                    <button
+                        class="quiz-nav-btn"
+                        onclick="nextQuizQuestion()">
+                        ${quizCurrentIndex === quizQuestions.length - 1
+            ? "Finish"
+            : "Next"}
+                    </button>
+
+                    <button
+                        class="quiz-submit-btn"
+                        onclick="submitQuiz()">
+                        Submit Quiz
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="quiz-sidebar">
+
+                <h3>Questions</h3>
+
+                <div class="quiz-question-numbers">
+
+                    ${quizQuestions.map(function (_, index) {
+
+                return `
+                            <button
+                                class="question-number
+                                ${index === quizCurrentIndex ? "current" : ""}"
+                                onclick="goToQuizQuestion(${index})">
+
+                                ${index + 1}
+
+                            </button>
+                        `;
+
+            }).join("")}
+
+                </div>
+
+                <div class="quiz-legend">
+
+                    <span>
+                        <i class="legend-current"></i>
+                        Current
+                    </span>
+
+                    <span>
+                        <i class="legend-normal"></i>
+                        Unvisited
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+    `;
+    updateQuizNavigator();
+}
+
+function checkQuizAnswer(selectedIndex) {
+
+    const question = quizQuestions[quizCurrentIndex];
+
+    const buttons = document.querySelectorAll(".quiz-option");
+
+    // Prevent changing answer after selecting
+    buttons.forEach(function (button) {
+        button.disabled = true;
+    });
+
+    // Get selected answer text
+    const selectedAnswer =
+        question.options[selectedIndex];
+
+    // Check answer
+    if (selectedAnswer === question.answer) {
+
+        buttons[selectedIndex].classList.add("correct");
+
+        quizScore++;
+
+    } else {
+
+        buttons[selectedIndex].classList.add("wrong");
+
+        // Show correct answer
+        buttons.forEach(function (button, index) {
+
+            if (question.options[index] === question.answer) {
+                button.classList.add("correct");
+            }
+
+        });
+    }
+
+    // Save selected answer
+    quizAnswers[quizCurrentIndex] = selectedIndex;
+
+    // Move to next question
+    setTimeout(function () {
+
+        quizCurrentIndex++;
+
+        showQuizQuestion();
+
+    }, 900);
+}
+function updateQuizNavigator() {
+
+    const buttons =
+        document.querySelectorAll(".question-number");
+
+    buttons.forEach(function (button, index) {
+
+        button.classList.remove(
+            "current",
+            "answered"
+        );
+
+        if (index === quizCurrentIndex) {
+
+            button.classList.add("current");
+
+        }
+        else if (
+            quizAnswers[index] !== undefined
+        ) {
+
+            button.classList.add("answered");
+
+        }
+
+    });
+}
+
+function nextQuizQuestion() {
+
+    if (quizCurrentIndex <
+        quizQuestions.length - 1) {
+
+        quizCurrentIndex++;
+
+        showQuizQuestion();
+
+    }
+    else {
+
+        submitQuiz();
+
+    }
+}
+
+function previousQuizQuestion() {
+
+    if (quizCurrentIndex > 0) {
+
+        quizCurrentIndex--;
+
+        showQuizQuestion();
+
+    }
+}
+
+function goToQuizQuestion(index) {
+
+    quizCurrentIndex = index;
+
+    showQuizQuestion();
+}
+
+function submitQuiz() {
+
+    const quizArea =
+        document.getElementById("quizArea");
+
+    quizArea.innerHTML = `
+
+        <div class="quiz-result">
+
+            <h2>Quiz Completed 🎉</h2>
+
+            <p class="quiz-score">
+                Your Score:
+                ${quizScore} / ${quizQuestions.length}
+            </p>
+
+            <button
+                class="primary-btn"
+                onclick="restartQuiz()">
+                Try Again
+            </button>
+
+        </div>
+
+    `;
+
+    document
+        .getElementById("quizQuestionCount")
+        .textContent = "Quiz Completed";
+}
+
+function restartQuiz() {
+
+    const startQuizBtn =
+        document.getElementById("startQuizBtn");
+
+    startQuizBtn.disabled = false;
+
+    startQuiz();
+}
+
+
+
 function initializeSettings() {
     const currentTheme = localStorage.getItem("theme") || "light";
     document.querySelector(
@@ -6881,7 +7802,6 @@ function initializeSettings() {
         });
     });
 }
-
 
 function loadComparisonTable(type) {
     const table = document.getElementById("comparisonTable");
