@@ -2487,12 +2487,12 @@ dialog button {
 .quiz-meta span {
     padding: 9px 14px;
     border-radius: 8px;
-    background: #f3f4f6;
+    background: #eee3dd;
     font-weight: 600;
 }
 
 .quiz-difficulty {
-    background: #fff1e8 !important;
+    background: #eee3dd !important;
     color: var(--primary);
 }
 
@@ -2975,7 +2975,7 @@ body.dark .quiz-option.selected .option-letter {
 
 
 .quiz-selection-summary div {
-    background: #f7f7f7;
+    background: #e7d6ca;
 
     border-radius: 10px;
 
@@ -3157,4 +3157,188 @@ body.dark .quiz-selection-summary div {
 body.dark .quiz-progress {
 
     background: #374151;
+}
+
+
+/* =========================================
+   INPUT EXAMPLE SUGGESTION
+   ========================================= */
+
+.input-suggestion {
+    display: inline-block;
+    margin-top: 6px;
+    padding: 5px 10px;
+
+    font-size: 13px;
+    color: #555;
+    background: rgba(255, 255, 255, 0.8);
+
+    border: 1px solid rgba(255, 105, 40, 0.35);
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    transition:
+        box-shadow 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+/* Glow when mouse goes over the suggestion */
+.input-suggestion:hover {
+    border-color: #ff641f;
+    box-shadow: 0 0 10px rgba(255, 100, 31, 0.45);
+    transform: translateY(-1px);
+}
+
+/* Small click effect */
+.input-suggestion:active {
+    transform: translateY(0);
+}
+
+/* ==========================================
+   LEETCODE PRACTICE
+========================================== */
+
+.leetcode-section {
+    margin-top: 30px;
+    background: var(--surface);
+    padding: 30px;
+    border-radius: var(--radius);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    animation: fadeIn .4s;
+}
+
+.leetcode-intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.leetcode-intro h2 {
+    color: var(--primary);
+    margin-bottom: 12px;
+    font-size: 26px;
+}
+
+.leetcode-intro p {
+    line-height: 1.8;
+    margin: 0;
+}
+.leetcode-problems {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.leetcode-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    transition: .3s ease;
+}
+
+.leetcode-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .08);
+}
+
+.leetcode-card-content h3 {
+    color: var(--text);
+    margin-bottom: 6px;
+    font-size: 19px;
+}
+
+.leetcode-number {
+    color: var(--primary);
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.leetcode-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.leetcode-tags span {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.leetcode-card-action {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-shrink: 0;
+}
+
+.leetcode-btn {
+    background: var(--primary);
+    color: white;
+    padding: 10px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: .3s ease;
+}
+
+.leetcode-btn:hover {
+    transform: translateY(-2px);
+    background: #152e80;
+}
+
+/* ==========================================
+   LEETCODE SEARCH & FILTERS
+========================================== */
+
+.leetcode-controls {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.leetcode-controls input,
+.leetcode-controls select {
+    height: 44px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 14px;
+    padding: 0 14px;
+    outline: none;
+}
+
+.leetcode-controls input {
+    flex: 1;
+    min-width: 240px;
+}
+
+.leetcode-controls select {
+    min-width: 170px;
+    cursor: pointer;
+}
+
+.leetcode-controls input:focus,
+.leetcode-controls select:focus {
+    border-color: var(--primary);
+}
+
+.leetcode-controls input::placeholder {
+    color: var(--text);
+    opacity: 0.6;
 }

@@ -29,6 +29,922 @@ let linkedList = [];
 let linkedListArea;
 const LIST_LIMIT = 10;
 let isListAnimating = false;
+const leetcodeProblems = [
+
+    // =========================
+    // BASIC MATH
+    // =========================
+
+    {
+        number: 9,
+        title: "Palindrome Number",
+        category: "Basic Math",
+        tags: ["Math"],
+        url: "https://leetcode.com/problems/palindrome-number/"
+    },
+    {
+        number: 7,
+        title: "Reverse Integer",
+        category: "Basic Math",
+        tags: ["Math"],
+        url: "https://leetcode.com/problems/reverse-integer/"
+    },
+    {
+        number: 412,
+        title: "FizzBuzz",
+        category: "Basic Math",
+        tags: ["Math", "Simulation"],
+        url: "https://leetcode.com/problems/fizz-buzz/"
+    },
+    {
+        number: 204,
+        title: "Count Primes",
+        category: "Basic Math",
+        tags: ["Math", "Sieve"],
+        url: "https://leetcode.com/problems/count-primes/"
+    },
+    {
+        number: 202,
+        title: "Happy Number",
+        category: "Basic Math",
+        tags: ["Math", "Hash Table"],
+        url: "https://leetcode.com/problems/happy-number/"
+    },
+    {
+        number: 13,
+        title: "Roman to Integer",
+        category: "Basic Math",
+        tags: ["Math", "String"],
+        url: "https://leetcode.com/problems/roman-to-integer/"
+    },
+    {
+        number: 1071,
+        title: "Greatest Common Divisor of Strings",
+        category: "Basic Math",
+        tags: ["Math", "String"],
+        url: "https://leetcode.com/problems/greatest-common-divisor-of-strings/"
+    },
+    {
+        number: 231,
+        title: "Power of Two",
+        category: "Basic Math",
+        tags: ["Math", "Bit Manipulation"],
+        url: "https://leetcode.com/problems/power-of-two/"
+    },
+    {
+        number: 326,
+        title: "Power of Three",
+        category: "Basic Math",
+        tags: ["Math"],
+        url: "https://leetcode.com/problems/power-of-three/"
+    },
+    {
+        number: 168,
+        title: "Excel Sheet Column Title",
+        category: "Basic Math",
+        tags: ["Math", "String"],
+        url: "https://leetcode.com/problems/excel-sheet-column-title/"
+    },
+    {
+        number: 172,
+        title: "Factorial Trailing Zeroes",
+        category: "Basic Math",
+        tags: ["Math"],
+        url: "https://leetcode.com/problems/factorial-trailing-zeroes/"
+    },
+    {
+        number: 50,
+        title: "Pow(x, n)",
+        category: "Basic Math",
+        tags: ["Math", "Recursion"],
+        url: "https://leetcode.com/problems/powx-n/"
+    },
+    {
+        number: 29,
+        title: "Divide Two Integers",
+        category: "Basic Math",
+        tags: ["Math", "Bit Manipulation"],
+        url: "https://leetcode.com/problems/divide-two-integers/"
+    },
+    {
+        number: 43,
+        title: "Multiply Strings",
+        category: "Basic Math",
+        tags: ["Math", "String"],
+        url: "https://leetcode.com/problems/multiply-strings/"
+    },
+
+
+    // =========================
+    // ARRAYS
+    // =========================
+
+    {
+        number: 1,
+        title: "Two Sum",
+        category: "Arrays",
+        tags: ["Array", "Hash Table"],
+        url: "https://leetcode.com/problems/two-sum/"
+    },
+    {
+        number: 121,
+        title: "Best Time to Buy and Sell Stock",
+        category: "Arrays",
+        tags: ["Array", "Greedy"],
+        url: "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/"
+    },
+    {
+        number: 53,
+        title: "Maximum Subarray",
+        category: "Arrays",
+        tags: ["Array", "Dynamic Programming"],
+        url: "https://leetcode.com/problems/maximum-subarray/"
+    },
+    {
+        number: 88,
+        title: "Merge Sorted Array",
+        category: "Arrays",
+        tags: ["Array", "Two Pointers"],
+        url: "https://leetcode.com/problems/merge-sorted-array/"
+    },
+    {
+        number: 26,
+        title: "Remove Duplicates from Sorted Array",
+        category: "Arrays",
+        tags: ["Array", "Two Pointers"],
+        url: "https://leetcode.com/problems/remove-duplicates-from-sorted-array/"
+    },
+    {
+        number: 189,
+        title: "Rotate Array",
+        category: "Arrays",
+        tags: ["Array"],
+        url: "https://leetcode.com/problems/rotate-array/"
+    },
+    {
+        number: 238,
+        title: "Product of Array Except Self",
+        category: "Arrays",
+        tags: ["Array", "Prefix Sum"],
+        url: "https://leetcode.com/problems/product-of-array-except-self/"
+    },
+    {
+        number: 169,
+        title: "Majority Element",
+        category: "Arrays",
+        tags: ["Array", "Hash Table"],
+        url: "https://leetcode.com/problems/majority-element/"
+    },
+    {
+        number: 283,
+        title: "Move Zeroes",
+        category: "Arrays",
+        tags: ["Array", "Two Pointers"],
+        url: "https://leetcode.com/problems/move-zeroes/"
+    },
+    {
+        number: 217,
+        title: "Contains Duplicate",
+        category: "Arrays",
+        tags: ["Array", "Hash Table"],
+        url: "https://leetcode.com/problems/contains-duplicate/"
+    },
+    {
+        number: 268,
+        title: "Missing Number",
+        category: "Arrays",
+        tags: ["Array", "Math"],
+        url: "https://leetcode.com/problems/missing-number/"
+    },
+    {
+        number: 448,
+        title: "Find All Numbers Disappeared in an Array",
+        category: "Arrays",
+        tags: ["Array", "Hash Table"],
+        url: "https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/"
+    },
+    {
+        number: 75,
+        title: "Sort Colors",
+        category: "Arrays",
+        tags: ["Array", "Two Pointers"],
+        url: "https://leetcode.com/problems/sort-colors/"
+    },
+    {
+        number: 31,
+        title: "Next Permutation",
+        category: "Arrays",
+        tags: ["Array"],
+        url: "https://leetcode.com/problems/next-permutation/"
+    },
+    {
+        number: 42,
+        title: "Trapping Rain Water",
+        category: "Arrays",
+        tags: ["Array", "Two Pointers"],
+        url: "https://leetcode.com/problems/trapping-rain-water/"
+    },
+    {
+        number: 11,
+        title: "Container With Most Water",
+        category: "Arrays",
+        tags: ["Array", "Two Pointers"],
+        url: "https://leetcode.com/problems/container-with-most-water/"
+    },
+    {
+        number: 134,
+        title: "Gas Station",
+        category: "Arrays",
+        tags: ["Array", "Greedy"],
+        url: "https://leetcode.com/problems/gas-station/"
+    },
+    {
+        number: 55,
+        title: "Jump Game",
+        category: "Arrays",
+        tags: ["Array", "Greedy"],
+        url: "https://leetcode.com/problems/jump-game/"
+    },
+    {
+        number: 45,
+        title: "Jump Game II",
+        category: "Arrays",
+        tags: ["Array", "Greedy"],
+        url: "https://leetcode.com/problems/jump-game-ii/"
+    },
+    {
+        number: 135,
+        title: "Candy",
+        category: "Arrays",
+        tags: ["Array", "Greedy"],
+        url: "https://leetcode.com/problems/candy/"
+    },
+
+
+    // =========================
+    // STRINGS
+    // =========================
+
+    {
+        number: 242,
+        title: "Valid Anagram",
+        category: "Strings",
+        tags: ["String", "Hash Table"],
+        url: "https://leetcode.com/problems/valid-anagram/"
+    },
+    {
+        number: 125,
+        title: "Valid Palindrome",
+        category: "Strings",
+        tags: ["String", "Two Pointers"],
+        url: "https://leetcode.com/problems/valid-palindrome/"
+    },
+    {
+        number: 14,
+        title: "Longest Common Prefix",
+        category: "Strings",
+        tags: ["String"],
+        url: "https://leetcode.com/problems/longest-common-prefix/"
+    },
+    {
+        number: 344,
+        title: "Reverse String",
+        category: "Strings",
+        tags: ["String", "Two Pointers"],
+        url: "https://leetcode.com/problems/reverse-string/"
+    },
+    {
+        number: 151,
+        title: "Reverse Words in a String",
+        category: "Strings",
+        tags: ["String"],
+        url: "https://leetcode.com/problems/reverse-words-in-a-string/"
+    },
+    {
+        number: 28,
+        title: "Implement strStr()",
+        category: "Strings",
+        tags: ["String", "String Matching"],
+        url: "https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/"
+    },
+    {
+        number: 5,
+        title: "Longest Palindromic Substring",
+        category: "Strings",
+        tags: ["String", "Dynamic Programming"],
+        url: "https://leetcode.com/problems/longest-palindromic-substring/"
+    },
+    {
+        number: 3,
+        title: "Longest Substring Without Repeating Characters",
+        category: "Strings",
+        tags: ["String", "Sliding Window"],
+        url: "https://leetcode.com/problems/longest-substring-without-repeating-characters/"
+    },
+    {
+        number: 49,
+        title: "Group Anagrams",
+        category: "Strings",
+        tags: ["String", "Hash Table"],
+        url: "https://leetcode.com/problems/group-anagrams/"
+    },
+    {
+        number: 20,
+        title: "Valid Parentheses",
+        category: "Strings",
+        tags: ["String", "Stack"],
+        url: "https://leetcode.com/problems/valid-parentheses/"
+    },
+    {
+        number: 8,
+        title: "String to Integer (atoi)",
+        category: "Strings",
+        tags: ["String", "Math"],
+        url: "https://leetcode.com/problems/string-to-integer-atoi/"
+    },
+    {
+        number: 12,
+        title: "Integer to Roman",
+        category: "Strings",
+        tags: ["String", "Math"],
+        url: "https://leetcode.com/problems/integer-to-roman/"
+    },
+    {
+        number: 13,
+        title: "Roman to Integer",
+        category: "Strings",
+        tags: ["String", "Hash Table"],
+        url: "https://leetcode.com/problems/roman-to-integer/"
+    },
+    {
+        number: 6,
+        title: "Zigzag Conversion",
+        category: "Strings",
+        tags: ["String"],
+        url: "https://leetcode.com/problems/zigzag-conversion/"
+    },
+    {
+        number: 76,
+        title: "Minimum Window Substring",
+        category: "Strings",
+        tags: ["String", "Sliding Window"],
+        url: "https://leetcode.com/problems/minimum-window-substring/"
+    },
+    {
+        number: 438,
+        title: "Find All Anagrams in a String",
+        category: "Strings",
+        tags: ["String", "Sliding Window"],
+        url: "https://leetcode.com/problems/find-all-anagrams-in-a-string/"
+    },
+    {
+        number: 205,
+        title: "Isomorphic Strings",
+        category: "Strings",
+        tags: ["String", "Hash Table"],
+        url: "https://leetcode.com/problems/isomorphic-strings/"
+    },
+    {
+        number: 290,
+        title: "Word Pattern",
+        category: "Strings",
+        tags: ["String", "Hash Table"],
+        url: "https://leetcode.com/problems/word-pattern/"
+    },
+    {
+        number: 394,
+        title: "Decode String",
+        category: "Strings",
+        tags: ["String", "Stack"],
+        url: "https://leetcode.com/problems/decode-string/"
+    },
+    {
+        number: 271,
+        title: "Encode and Decode Strings",
+        category: "Strings",
+        tags: ["String", "Design"],
+        url: "https://leetcode.com/problems/encode-and-decode-strings/"
+    },
+
+
+    // =========================
+    // BINARY SEARCH
+    // =========================
+
+    {
+        number: 704,
+        title: "Binary Search",
+        category: "Binary Search",
+        tags: ["Binary Search"],
+        url: "https://leetcode.com/problems/binary-search/"
+    },
+    {
+        number: 35,
+        title: "Search Insert Position",
+        category: "Binary Search",
+        tags: ["Binary Search"],
+        url: "https://leetcode.com/problems/search-insert-position/"
+    },
+    {
+        number: 74,
+        title: "Search a 2D Matrix",
+        category: "Binary Search",
+        tags: ["Binary Search", "Matrix"],
+        url: "https://leetcode.com/problems/search-a-2d-matrix/"
+    },
+    {
+        number: 34,
+        title: "Find First and Last Position of Element in Sorted Array",
+        category: "Binary Search",
+        tags: ["Binary Search"],
+        url: "https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/"
+    },
+    {
+        number: 33,
+        title: "Search in Rotated Sorted Array",
+        category: "Binary Search",
+        tags: ["Binary Search", "Array"],
+        url: "https://leetcode.com/problems/search-in-rotated-sorted-array/"
+    },
+    {
+        number: 81,
+        title: "Search in Rotated Sorted Array II",
+        category: "Binary Search",
+        tags: ["Binary Search", "Array"],
+        url: "https://leetcode.com/problems/search-in-rotated-sorted-array-ii/"
+    },
+    {
+        number: 153,
+        title: "Find Minimum in Rotated Sorted Array",
+        category: "Binary Search",
+        tags: ["Binary Search", "Array"],
+        url: "https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/"
+    },
+    {
+        number: 162,
+        title: "Find Peak Element",
+        category: "Binary Search",
+        tags: ["Binary Search", "Array"],
+        url: "https://leetcode.com/problems/find-peak-element/"
+    },
+    {
+        number: 875,
+        title: "Koko Eating Bananas",
+        category: "Binary Search",
+        tags: ["Binary Search"],
+        url: "https://leetcode.com/problems/koko-eating-bananas/"
+    },
+    {
+        number: 1011,
+        title: "Capacity To Ship Packages Within D Days",
+        category: "Binary Search",
+        tags: ["Binary Search"],
+        url: "https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/"
+    },
+    {
+        number: 410,
+        title: "Split Array Largest Sum",
+        category: "Binary Search",
+        tags: ["Binary Search", "Dynamic Programming"],
+        url: "https://leetcode.com/problems/split-array-largest-sum/"
+    },
+    {
+        number: 4,
+        title: "Median of Two Sorted Arrays",
+        category: "Binary Search",
+        tags: ["Binary Search", "Array"],
+        url: "https://leetcode.com/problems/median-of-two-sorted-arrays/"
+    },
+    {
+        number: 69,
+        title: "Sqrt(x)",
+        category: "Binary Search",
+        tags: ["Binary Search", "Math"],
+        url: "https://leetcode.com/problems/sqrtx/"
+    },
+    {
+        number: 367,
+        title: "Valid Perfect Square",
+        category: "Binary Search",
+        tags: ["Binary Search", "Math"],
+        url: "https://leetcode.com/problems/valid-perfect-square/"
+    },
+    {
+        number: 287,
+        title: "Find the Duplicate Number",
+        category: "Binary Search",
+        tags: ["Binary Search", "Array"],
+        url: "https://leetcode.com/problems/find-the-duplicate-number/"
+    },
+
+
+    // =========================
+    // STACKS & QUEUES
+    // =========================
+
+    {
+        number: 20,
+        title: "Valid Parentheses",
+        category: "Stacks & Queues",
+        tags: ["Stack", "String"],
+        url: "https://leetcode.com/problems/valid-parentheses/"
+    },
+    {
+        number: 155,
+        title: "Min Stack",
+        category: "Stacks & Queues",
+        tags: ["Stack"],
+        url: "https://leetcode.com/problems/min-stack/"
+    },
+    {
+        number: 232,
+        title: "Implement Queue using Stacks",
+        category: "Stacks & Queues",
+        tags: ["Queue", "Stack"],
+        url: "https://leetcode.com/problems/implement-queue-using-stacks/"
+    },
+    {
+        number: 225,
+        title: "Implement Stack using Queues",
+        category: "Stacks & Queues",
+        tags: ["Stack", "Queue"],
+        url: "https://leetcode.com/problems/implement-stack-using-queues/"
+    },
+    {
+        number: 739,
+        title: "Daily Temperatures",
+        category: "Stacks & Queues",
+        tags: ["Stack", "Array"],
+        url: "https://leetcode.com/problems/daily-temperatures/"
+    },
+    {
+        number: 496,
+        title: "Next Greater Element I",
+        category: "Stacks & Queues",
+        tags: ["Stack", "Array"],
+        url: "https://leetcode.com/problems/next-greater-element-i/"
+    },
+    {
+        number: 503,
+        title: "Next Greater Element II",
+        category: "Stacks & Queues",
+        tags: ["Stack", "Array"],
+        url: "https://leetcode.com/problems/next-greater-element-ii/"
+    },
+    {
+        number: 84,
+        title: "Largest Rectangle in Histogram",
+        category: "Stacks & Queues",
+        tags: ["Stack", "Array"],
+        url: "https://leetcode.com/problems/largest-rectangle-in-histogram/"
+    },
+    {
+        number: 85,
+        title: "Maximal Rectangle",
+        category: "Stacks & Queues",
+        tags: ["Stack", "Matrix"],
+        url: "https://leetcode.com/problems/maximal-rectangle/"
+    },
+    {
+        number: 735,
+        title: "Asteroid Collision",
+        category: "Stacks & Queues",
+        tags: ["Stack", "Array"],
+        url: "https://leetcode.com/problems/asteroid-collision/"
+    },
+    {
+        number: 394,
+        title: "Decode String",
+        category: "Stacks & Queues",
+        tags: ["Stack", "String"],
+        url: "https://leetcode.com/problems/decode-string/"
+    },
+    {
+        number: 150,
+        title: "Evaluate Reverse Polish Notation",
+        category: "Stacks & Queues",
+        tags: ["Stack", "Math"],
+        url: "https://leetcode.com/problems/evaluate-reverse-polish-notation/"
+    },
+    {
+        number: 224,
+        title: "Basic Calculator",
+        category: "Stacks & Queues",
+        tags: ["Stack", "Math"],
+        url: "https://leetcode.com/problems/basic-calculator/"
+    },
+    {
+        number: 227,
+        title: "Basic Calculator II",
+        category: "Stacks & Queues",
+        tags: ["Stack", "Math"],
+        url: "https://leetcode.com/problems/basic-calculator-ii/"
+    },
+    {
+        number: 239,
+        title: "Sliding Window Maximum",
+        category: "Stacks & Queues",
+        tags: ["Queue", "Sliding Window"],
+        url: "https://leetcode.com/problems/sliding-window-maximum/"
+    },
+
+
+    // =========================
+    // TREES
+    // =========================
+
+    {
+        number: 104,
+        title: "Maximum Depth of Binary Tree",
+        category: "Tree",
+        difficulty: "Easy",
+        tags: ["Tree", "DFS"],
+        url: "https://leetcode.com/problems/maximum-depth-of-binary-tree/"
+    },
+    {
+        number: 226,
+        title: "Invert Binary Tree",
+        category: "Tree",
+        difficulty: "Easy",
+        tags: ["Tree", "DFS"],
+        url: "https://leetcode.com/problems/invert-binary-tree/"
+    },
+    {
+        number: 101,
+        title: "Symmetric Tree",
+        category: "Tree",
+        difficulty: "Easy",
+        tags: ["Tree", "DFS"],
+        url: "https://leetcode.com/problems/symmetric-tree/"
+    },
+    {
+        number: 112,
+        title: "Path Sum",
+        category: "Tree",
+        difficulty: "Easy",
+        tags: ["Tree", "DFS"],
+        url: "https://leetcode.com/problems/path-sum/"
+    },
+    {
+        number: 543,
+        title: "Diameter of Binary Tree",
+        category: "Tree",
+        difficulty: "Easy",
+        tags: ["Tree", "DFS"],
+        url: "https://leetcode.com/problems/diameter-of-binary-tree/"
+    },
+    {
+        number: 572,
+        title: "Subtree of Another Tree",
+        category: "Tree",
+        difficulty: "Easy",
+        tags: ["Tree", "DFS"],
+        url: "https://leetcode.com/problems/subtree-of-another-tree/"
+    },
+    {
+        number: 617,
+        title: "Merge Two Binary Trees",
+        category: "Tree",
+        difficulty: "Easy",
+        tags: ["Tree", "DFS"],
+        url: "https://leetcode.com/problems/merge-two-binary-trees/"
+    },
+    {
+        number: 110,
+        title: "Balanced Binary Tree",
+        category: "Tree",
+        difficulty: "Easy",
+        tags: ["Tree", "DFS"],
+        url: "https://leetcode.com/problems/balanced-binary-tree/"
+    },
+    {
+        number: 102,
+        title: "Binary Tree Level Order Traversal",
+        category: "Tree",
+        difficulty: "Medium",
+        tags: ["Tree", "BFS"],
+        url: "https://leetcode.com/problems/binary-tree-level-order-traversal/"
+    },
+    {
+        number: 103,
+        title: "Binary Tree Zigzag Level Order Traversal",
+        category: "Tree",
+        difficulty: "Medium",
+        tags: ["Tree", "BFS"],
+        url: "https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/"
+    },
+    {
+        number: 199,
+        title: "Binary Tree Right Side View",
+        category: "Tree",
+        difficulty: "Medium",
+        tags: ["Tree", "BFS"],
+        url: "https://leetcode.com/problems/binary-tree-right-side-view/"
+    },
+    {
+        number: 105,
+        title: "Construct Binary Tree from Preorder and Inorder Traversal",
+        category: "Tree",
+        difficulty: "Medium",
+        tags: ["Tree", "Recursion"],
+        url: "https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/"
+    },
+    {
+        number: 116,
+        title: "Populating Next Right Pointers in Each Node",
+        category: "Tree",
+        difficulty: "Medium",
+        tags: ["Tree", "BFS"],
+        url: "https://leetcode.com/problems/populating-next-right-pointers-in-each-node/"
+    },
+    {
+        number: 235,
+        title: "Lowest Common Ancestor of a Binary Search Tree",
+        category: "Tree",
+        difficulty: "Medium",
+        tags: ["Tree", "BST"],
+        url: "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/"
+    },
+    {
+        number: 98,
+        title: "Validate Binary Search Tree",
+        category: "Tree",
+        difficulty: "Medium",
+        tags: ["Tree", "BST"],
+        url: "https://leetcode.com/problems/validate-binary-search-tree/"
+    },
+    {
+        number: 230,
+        title: "Kth Smallest Element in a BST",
+        category: "Tree",
+        difficulty: "Medium",
+        tags: ["Tree", "BST"],
+        url: "https://leetcode.com/problems/kth-smallest-element-in-a-bst/"
+    },
+    {
+        number: 113,
+        title: "Path Sum II",
+        category: "Tree",
+        difficulty: "Medium",
+        tags: ["Tree", "DFS"],
+        url: "https://leetcode.com/problems/path-sum-ii/"
+    },
+    {
+        number: 1448,
+        title: "Count Good Nodes in Binary Tree",
+        category: "Tree",
+        difficulty: "Medium",
+        tags: ["Tree", "DFS"],
+        url: "https://leetcode.com/problems/count-good-nodes-in-binary-tree/"
+    },
+
+
+    // =========================
+    // LINKED LISTS
+    // =========================
+
+    {
+        number: 206,
+        title: "Reverse Linked List",
+        category: "Linked Lists",
+        tags: ["Linked List"],
+        url: "https://leetcode.com/problems/reverse-linked-list/"
+    },
+    {
+        number: 21,
+        title: "Merge Two Sorted Lists",
+        category: "Linked Lists",
+        tags: ["Linked List"],
+        url: "https://leetcode.com/problems/merge-two-sorted-lists/"
+    },
+    {
+        number: 141,
+        title: "Linked List Cycle",
+        category: "Linked Lists",
+        tags: ["Linked List", "Two Pointers"],
+        url: "https://leetcode.com/problems/linked-list-cycle/"
+    },
+    {
+        number: 142,
+        title: "Linked List Cycle II",
+        category: "Linked Lists",
+        tags: ["Linked List", "Two Pointers"],
+        url: "https://leetcode.com/problems/linked-list-cycle-ii/"
+    },
+    {
+        number: 876,
+        title: "Middle of the Linked List",
+        category: "Linked Lists",
+        tags: ["Linked List", "Two Pointers"],
+        url: "https://leetcode.com/problems/middle-of-the-linked-list/"
+    },
+    {
+        number: 19,
+        title: "Remove Nth Node From End of List",
+        category: "Linked Lists",
+        tags: ["Linked List", "Two Pointers"],
+        url: "https://leetcode.com/problems/remove-nth-node-from-end-of-list/"
+    },
+    {
+        number: 234,
+        title: "Palindrome Linked List",
+        category: "Linked Lists",
+        tags: ["Linked List", "Two Pointers"],
+        url: "https://leetcode.com/problems/palindrome-linked-list/"
+    },
+    {
+        number: 160,
+        title: "Intersection of Two Linked Lists",
+        category: "Linked Lists",
+        tags: ["Linked List", "Two Pointers"],
+        url: "https://leetcode.com/problems/intersection-of-two-linked-lists/"
+    },
+    {
+        number: 2,
+        title: "Add Two Numbers",
+        category: "Linked Lists",
+        tags: ["Linked List", "Math"],
+        url: "https://leetcode.com/problems/add-two-numbers/"
+    },
+    {
+        number: 23,
+        title: "Merge K Sorted Lists",
+        category: "Linked Lists",
+        tags: ["Linked List", "Heap"],
+        url: "https://leetcode.com/problems/merge-k-sorted-lists/"
+    },
+    {
+        number: 138,
+        title: "Copy List with Random Pointer",
+        category: "Linked Lists",
+        tags: ["Linked List", "Hash Table"],
+        url: "https://leetcode.com/problems/copy-list-with-random-pointer/"
+    },
+    {
+        number: 143,
+        title: "Reorder List",
+        category: "Linked Lists",
+        tags: ["Linked List", "Two Pointers"],
+        url: "https://leetcode.com/problems/reorder-list/"
+    },
+    {
+        number: 24,
+        title: "Swap Nodes in Pairs",
+        category: "Linked Lists",
+        tags: ["Linked List", "Recursion"],
+        url: "https://leetcode.com/problems/swap-nodes-in-pairs/"
+    },
+    {
+        number: 25,
+        title: "Reverse Nodes in k-Group",
+        category: "Linked Lists",
+        tags: ["Linked List"],
+        url: "https://leetcode.com/problems/reverse-nodes-in-k-group/"
+    },
+    {
+        number: 61,
+        title: "Rotate List",
+        category: "Linked Lists",
+        tags: ["Linked List"],
+        url: "https://leetcode.com/problems/rotate-list/"
+    },
+    {
+        number: 86,
+        title: "Partition List",
+        category: "Linked Lists",
+        tags: ["Linked List"],
+        url: "https://leetcode.com/problems/partition-list/"
+    },
+    {
+        number: 83,
+        title: "Remove Duplicates from Sorted List",
+        category: "Linked Lists",
+        tags: ["Linked List"],
+        url: "https://leetcode.com/problems/remove-duplicates-from-sorted-list/"
+    },
+    {
+        number: 237,
+        title: "Delete Node in a Linked List",
+        category: "Linked Lists",
+        tags: ["Linked List"],
+        url: "https://leetcode.com/problems/delete-node-in-a-linked-list/"
+    },
+    {
+        number: 148,
+        title: "Sort List",
+        category: "Linked Lists",
+        tags: ["Linked List", "Sorting"],
+        url: "https://leetcode.com/problems/sort-list/"
+    },
+    {
+        number: 430,
+        title: "Flatten a Multilevel Doubly Linked List",
+        category: "Linked Lists",
+        tags: ["Linked List", "DFS"],
+        url: "https://leetcode.com/problems/flatten-a-multilevel-doubly-linked-list/"
+    }
+
+];
 menuToggle.addEventListener("click", () => {
     sidebar.classList.toggle("show");
 });
@@ -53,26 +969,59 @@ themeToggle.addEventListener("click", () => {
 const pages = {
     dashboard: `
     <section class="welcome">
-        <h1>Welcome to Interactive DSA Learning Studio</h1>
-        <p>
-            Learn Data Structures and Algorithms using animations,
-            visualizations and interactive examples.
-        </p>
-        <div class="dashboard-cards">
-            <div class="card">
-                <h3>Algorithms</h3>
-                <p>10+</p>
-            </div>
-            <div class="card">
-                <h3>Visualizations</h3>
-                <p>Interactive</p>
-            </div>
-            <div class="card">
-                <h3>Quiz</h3>
-                <p>Practice AnyTime</p>
-            </div>
 
-    `,
+        <h1>
+            Welcome to Interactive DSA Learning Studio
+        </h1>
+
+        <p>
+            Learn Data Structures and Algorithms
+            through interactive visualizations,
+            animations, quizzes, comparisons,
+            and real-time demonstrations.
+        </p>
+
+        <div class="dashboard-cards">
+
+            <article class="card">
+
+                <h3>Algorithms</h3>
+
+                <p>10+</p>
+
+            </article>
+
+
+            <article class="card">
+
+                <h3>Visualizations</h3>
+
+                <p>Interactive</p>
+
+            </article>
+
+
+            <article class="card">
+
+                <h3>LeetCode Problems</h3>
+
+                <p>120+</p>
+
+            </article>
+
+
+            <article class="card">
+
+                <h3>Quiz</h3>
+
+                <p>Practice Anytime</p>
+
+            </article>
+
+        </div>
+
+    </section>
+`,
     array: `
 
 <section class="array-page">
@@ -1288,8 +2237,53 @@ Start Sorting
     <div id="comparisonTable"></div>
 </section>
 `,
+    leetcode: `
+    <div class="page-header">
+        <div>
+            <h1>💻 LeetCode Practice</h1>
+            <p>Practice important DSA problems on LeetCode.</p>
+        </div>
+    </div>
 
-quiz: `
+    <div class="leetcode-section">
+
+        <div class="leetcode-intro">
+            <h2>🚀 Practice DSA Problems</h2>
+
+            <p>
+                Solve carefully selected coding problems based on the
+                important DSA topics covered in this learning studio.
+            </p>
+        </div>
+<div class="leetcode-controls">
+
+    <input
+        type="text"
+        id="leetcodeSearch"
+        placeholder="🔎 Search problems..."
+        autocomplete="off">
+
+    <select id="leetcodeCategory">
+        <option value="all">All Topics</option>
+        <option value="Basic Math">Basic Math</option>
+        <option value="Arrays">Arrays</option>
+        <option value="Strings">Strings</option>
+        <option value="Binary Search">Binary Search</option>
+        <option value="Stacks & Queues">Stacks & Queues</option>
+        <option value="Tree">Tree</option>
+        <option value="Linked Lists">Linked Lists</option>
+    </select>
+
+</div>
+        <div
+            class="leetcode-problems"
+            id="leetcodeProblems">
+        </div>
+
+    </div>
+`,
+
+    quiz: `
 <section class="quiz-page">
 
     <div class="quiz-header">
@@ -1431,10 +2425,6 @@ quiz: `
                             50 Questions
                         </option>
 
-                        <option value="100">
-                            100 Questions
-                        </option>
-
                     </select>
 
                 </div>
@@ -1532,7 +2522,7 @@ quiz: `
         <div class="settings-card">
 
             <h2>Animation
-            <span class="soon-badge">Soon</span>
+            <span class="soon-badge">New</span>
             </h2>
 
             <label class="setting-option">
@@ -1658,6 +2648,81 @@ quiz: `
 
 };
 
+function renderLeetCodeProblems(problems = leetcodeProblems) {
+
+    const container = document.getElementById("leetcodeProblems");
+
+    if (!container) return;
+
+    container.innerHTML = problems.map(function(problem) {
+
+        const tags = problem.tags.map(function(tag) {
+            return `<span>${tag}</span>`;
+        }).join("");
+        return `
+            <div class="leetcode-card">
+
+                <div class="leetcode-card-content">
+
+                    <h3>${problem.title}</h3>
+
+                    <p class="leetcode-number">
+                        LeetCode #${problem.number}
+                    </p>
+
+                    <div class="leetcode-tags">
+                        ${tags}
+                    </div>
+
+                </div>
+
+                <div class="leetcode-card-action">
+
+                    <a
+                        href="${problem.url}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="leetcode-btn">
+                        Practice ↗
+                    </a>
+
+                </div>
+
+            </div>
+        `;
+
+    }).join("");
+}
+function filterLeetCodeProblems() {
+
+    const searchInput = document.getElementById("leetcodeSearch");
+    const categorySelect = document.getElementById("leetcodeCategory");
+
+    if (!searchInput || !categorySelect) return;
+
+    const searchText = searchInput.value.toLowerCase().trim();
+    const selectedCategory = categorySelect.value;
+
+    const filteredProblems = leetcodeProblems.filter(function(problem) {
+
+        const matchesSearch =
+            problem.title.toLowerCase().includes(searchText) ||
+            problem.number.toString().includes(searchText) ||
+            problem.tags.some(function(tag) {
+                return tag.toLowerCase().includes(searchText);
+            });
+
+        const matchesCategory =
+            selectedCategory === "all" ||
+            problem.category === selectedCategory;
+
+        return matchesSearch && matchesCategory;
+
+    });
+
+    renderLeetCodeProblems(filteredProblems);
+}
+
 function loadPage(pageName) {
 
     app.innerHTML = pages[pageName];
@@ -1699,7 +2764,16 @@ function loadPage(pageName) {
     else if (pageName === "linkedlist") {
         initializeLinkedList();
     }
+else if (pageName === "leetcode") {
 
+    renderLeetCodeProblems();
+
+    const searchInput = document.getElementById("leetcodeSearch");
+
+    if (searchInput) {
+        searchInput.addEventListener("input", filterLeetCodeProblems);
+    }
+}
     else if (pageName === "settings") {
         initializeSettings();
     }
@@ -1722,10 +2796,35 @@ function loadPage(pageName) {
     }
 
 }
+function addInputSuggestion(inputId, suggestionText) {
+
+    const input = document.getElementById(inputId);
+
+    if (!input) return;
+
+    // Create suggestion
+    const suggestion = document.createElement("div");
+
+    suggestion.className = "input-suggestion";
+    suggestion.textContent = "💡 Example: " + suggestionText;
+
+    // Put suggestion immediately after input
+    input.insertAdjacentElement("afterend", suggestion);
+
+    // Fill input when clicked
+    suggestion.addEventListener("click", function () {
+        input.value = suggestionText;
+        input.focus();
+    });
+}
 
 function initializeArray() {
 
     const input = document.getElementById("arrayInput");
+    addInputSuggestion(
+        "arrayInput",
+        "10,20,30,40,50"
+    );
 
     const indexInput = document.createElement("input");
 
@@ -3611,6 +4710,10 @@ function initializeString() {
 
     const input =
         document.getElementById("stringInput");
+    addInputSuggestion(
+        "stringInput",
+        "HELLO"
+    );
 
     const indexInput =
         document.createElement("input");
@@ -5858,6 +6961,10 @@ function clearString() {
 
 function initializeSorting() {
     const generateBtn = document.getElementById("generateBtn");
+    addInputSuggestion(
+        "arrayInput",
+        "8,5,3,7,1"
+    );
     const startBtn = document.getElementById("startBtn");
     generateBtn.addEventListener("click", createBars);
     startBtn.addEventListener("click", startSorting);
@@ -6434,6 +7541,15 @@ async function quickSort() {
 
 function initializeSearching() {
     const generateBtn = document.getElementById("generateBtn");
+    addInputSuggestion(
+        "arrayInput",
+        "10,20,30,40,50"
+    );
+
+    addInputSuggestion(
+        "targetInput",
+        "30"
+    );
     const startBtn = document.getElementById("startBtn");
     const speedSelect = document.getElementById("speedSelect");
     generateBtn.addEventListener(
@@ -6601,6 +7717,10 @@ function updateDashboard() {
     }
 }
 function initializeStack() {
+    addInputSuggestion(
+        "stackInput",
+        "10"
+    );
     stackArea = document.getElementById("stackArea");
     document.getElementById("pushBtn")
         .addEventListener("click", pushElement);
@@ -6730,6 +7850,10 @@ async function clearStack() {
     isAnimating = false;
 }
 function initializeQueue() {
+    addInputSuggestion(
+        "queueInput",
+        "10"
+    );
     queueArea = document.getElementById("queueArea");
     document.getElementById("enqueueBtn")
         .addEventListener("click", enqueueElement);
@@ -6854,6 +7978,10 @@ function updateQueueDashboard() {
 }
 
 function initializeLinkedList() {
+    addInputSuggestion(
+        "listInput",
+        "10"
+    );
     linkedListArea = document.getElementById("linkedListArea");
     document.getElementById("insertFirstBtn")
         .addEventListener("click", insertFirst);
@@ -7191,16 +8319,16 @@ async function startQuiz() {
 
         const data =
             await response.json();
-        
+
         if (window.quizLoadingTimer) {
 
-    clearInterval(
-        window.quizLoadingTimer
-    );
+            clearInterval(
+                window.quizLoadingTimer
+            );
 
-    window.quizLoadingTimer =
-        null;
-}
+            window.quizLoadingTimer =
+                null;
+        }
 
 
         if (!response.ok) {
@@ -7446,7 +8574,7 @@ function showQuizLoading(
 
                 }
                 else if (remainingTime <= 8 &&
-                         remainingTime > 0) {
+                    remainingTime > 0) {
 
                     statusElement.textContent =
                         "Almost ready...";
@@ -7511,7 +8639,7 @@ function showQuizQuestion() {
 
 <div class="quiz-options">
 
-    ${question.options.map(function(option, index){
+    ${question.options.map(function (option, index) {
 
         return `
             <button
@@ -7748,12 +8876,22 @@ function submitQuiz() {
 
 function restartQuiz() {
 
+    const quizStartSection =
+        document.getElementById("quizStartSection");
+
+    const quizArea =
+        document.getElementById("quizArea");
+
     const startQuizBtn =
         document.getElementById("startQuizBtn");
 
+    quizStartSection.style.display = "block";
+    quizArea.innerHTML = "";
+
     startQuizBtn.disabled = false;
 
-    startQuiz();
+    document.getElementById("quizQuestionCount").textContent =
+        "Quiz Setup";
 }
 
 
@@ -7964,3 +9102,20 @@ menuItems.forEach(item => {
 });
 
 loadPage("dashboard");
+
+
+document.addEventListener("input", function(event) {
+
+    if (event.target.id === "leetcodeSearch") {
+        filterLeetCodeProblems();
+    }
+
+});
+
+document.addEventListener("change", function(event) {
+
+    if (event.target.id === "leetcodeCategory") {
+        filterLeetCodeProblems();
+    }
+
+});

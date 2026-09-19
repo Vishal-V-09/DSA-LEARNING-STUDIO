@@ -1,8 +1,11 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from dotenv import load_dotenv
 import os
 import requests
 import json
+
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
@@ -31,12 +34,13 @@ def quiz():
         count = int(data.get("count", 5))
 
         # Keep count reasonable
-        count = max(1, min(count, 20))
+        count = max(1, min(count, 50))
 
         # -----------------------------
         # 2. Get OpenRouter API key
         # -----------------------------
         api_key = os.getenv("OPENROUTER_API_KEY")
+        print("OpenRouter key loaded:", bool(api_key))
 
         if not api_key:
             return jsonify({
