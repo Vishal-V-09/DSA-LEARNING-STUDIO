@@ -8296,7 +8296,7 @@ async function startQuiz() {
     try {
 
         const response = await fetch(
-            "http://127.0.0.1:5000/api/quiz",
+            "https://dsa-learning-studio.onrender.com/api/quiz",
             {
                 method: "POST",
 
